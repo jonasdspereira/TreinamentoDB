@@ -2,6 +2,8 @@ package com.db.biblioteca.model;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "livros")
 public class Livro {
@@ -50,5 +52,22 @@ public class Livro {
 
     public Biblioteca getBiblioteca() {
         return biblioteca;
+    }
+
+    public void setBiblioteca(Biblioteca biblioteca){
+        this.biblioteca = biblioteca;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Livro livro = (Livro) o;
+        return Objects.equals(titulo, livro.titulo) && Objects.equals(autor, livro.autor) && Objects.equals(anoDePublicacao, livro.anoDePublicacao);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(titulo, autor, anoDePublicacao);
     }
 }
